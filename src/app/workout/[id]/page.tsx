@@ -1,5 +1,7 @@
+import WorkoutActions from "@/components/cardSection/WorkoutActions";
 import { TWorkout } from "@/lib/Api";
 import Image from "next/image";
+// import WorkoutActions from "./WorkoutActions";
 
 type DetailsPageProps = {
   params: Promise<{
@@ -123,7 +125,7 @@ const WorkoutDetails = async ({ params }: DetailsPageProps) => {
 </div>
 
   
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+      {/* <div className="mt-8 flex flex-col gap-3 sm:flex-row">
 
   
   <button
@@ -134,14 +136,16 @@ const WorkoutDetails = async ({ params }: DetailsPageProps) => {
   </button>
 
   {/* Save for Later */}
-  <button
+  {/* <button
     className="flex items-center justify-center gap-2 rounded-full border border-white px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-white hover:text-[#101215]"
   >
     <span className="text-lg">♡</span>
     Save for later
   </button>
 
-      </div>
+      </div> */} 
+
+      <WorkoutActions workout={workout} />
 
 
         </div>

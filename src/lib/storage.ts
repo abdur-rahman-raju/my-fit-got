@@ -1,0 +1,70 @@
+import { TWorkout } from "./Api";
+
+const PLAN_KEY = "fitlog-plan";
+const SAVED_KEY = "fitlog-saved";
+
+// ====================
+// TODAY'S PLAN
+// ====================
+
+export const getPlan = (): TWorkout[] => {
+  if (typeof window === "undefined") return [];
+
+  const data = localStorage.getItem(PLAN_KEY);
+
+  return data ? JSON.parse(data) : [];
+};
+
+export const addToPlan = (workout: TWorkout) => {
+  const plan = getPlan();
+
+  if (plan.length >= 5) {
+    return false;
+  }
+
+  const alreadyExists = plan.some(
+    (item) => item.id === workout.id
+  );
+
+  if (alreadyExists) {
+    return false;
+  }
+
+  localStorage.setItem(
+    PLAN_KEY,
+    JSON.stringify([...plan, workout])
+  );
+
+  return true;
+};
+
+// ====================
+// SAVED WORKOUTS
+// ====================
+
+export const getSaved = (): TWorkout[] => {
+  if (typeof window === "undefined") return [];
+
+  const data = localStorage.getItem(SAVED_KEY);
+
+  return data ? JSON.parse(data) : [];
+};
+
+export const addToSaved = (workout: TWorkout) => {
+  const saved = getSaved();
+
+  const alreadyExists = saved.some(
+    (item) => item.id === workout.id
+  );
+
+  if (alreadyExists) {
+    return false;
+  }
+
+  localStorage.setItem(
+    SAVED_KEY,
+    JSON.stringify([...saved, workout])
+  );
+
+  return true;
+};
