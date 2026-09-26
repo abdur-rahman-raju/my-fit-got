@@ -11,20 +11,36 @@ import PlanMetrics from "./PlanMetrics";
 import WorkoutPlanCard from "./WorkoutPlanCard";
 
 const MyPlan = () => {
-
   const [activeTab, setActiveTab] =
     useState<"plan" | "saved">("plan");
 
   const [plan, setPlan] = useState<TWorkout[]>([]);
   const [saved, setSaved] = useState<TWorkout[]>([]);
 
-  // Load localStorage data
+  const [toast, setToast] = useState("");
+
+  // Load data
   useEffect(() => {
     setPlan(getPlan());
     setSaved(getSaved());
   }, []);
 
-  // Active tab অনুযায়ী data
+  // Reload current localStorage data
+  const refreshData = () => {
+    setPlan(getPlan());
+    setSaved(getSaved());
+  };
+
+  // Toast
+  const showToast = (message: string) => {
+    setToast(message);
+
+    setTimeout(() => {
+      setToast("");
+    }, 2500);
+  };
+
+  // Active tab data
   const currentWorkouts =
     activeTab === "plan"
       ? plan
@@ -69,7 +85,6 @@ const MyPlan = () => {
 
           {currentWorkouts.length === 0 ? (
 
-            /* Empty State */
             <div className="flex min-h-[350px] flex-col items-center justify-center text-center">
 
               <h2 className="text-2xl font-bold">
@@ -91,13 +106,15 @@ const MyPlan = () => {
 
           ) : (
 
-            /* Workout Cards */
             <div className="space-y-4">
 
               {currentWorkouts.map((workout) => (
                 <WorkoutPlanCard
                   key={workout.id}
                   workout={workout}
+                  isPlan={activeTab === "plan"}
+                  onUpdate={refreshData}
+                  onToast={showToast}
                 />
               ))}
 
@@ -108,6 +125,14 @@ const MyPlan = () => {
         </div>
 
       </div>
+
+
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-[#C2F800] px-6 py-3 text-sm font-bold text-[#1A2312] shadow-lg">
+          {toast}
+        </div>
+      )}
 
     </main>
   );

@@ -38,8 +38,41 @@ export const addToPlan = (workout: TWorkout) => {
   return true;
 };
 
+export const removeFromPlan = (id: number) => {
+  const plan = getPlan();
+
+  const updatedPlan = plan.filter(
+    (workout) => workout.id !== id
+  );
+
+  localStorage.setItem(
+    PLAN_KEY,
+    JSON.stringify(updatedPlan)
+  );
+
+  return updatedPlan;
+};
+
+export const markAsDone = (id: number) => {
+  const plan = getPlan();
+
+  const updatedPlan = plan.map((workout) =>
+    workout.id === id
+      ? { ...workout, completed: true }
+      : workout
+  );
+
+  localStorage.setItem(
+    PLAN_KEY,
+    JSON.stringify(updatedPlan)
+  );
+
+  return updatedPlan;
+};
+
+
 // ====================
-// SAVED WORKOUTS
+// SAVED
 // ====================
 
 export const getSaved = (): TWorkout[] => {
@@ -67,4 +100,19 @@ export const addToSaved = (workout: TWorkout) => {
   );
 
   return true;
+};
+
+export const removeFromSaved = (id: number) => {
+  const saved = getSaved();
+
+  const updatedSaved = saved.filter(
+    (workout) => workout.id !== id
+  );
+
+  localStorage.setItem(
+    SAVED_KEY,
+    JSON.stringify(updatedSaved)
+  );
+
+  return updatedSaved;
 };

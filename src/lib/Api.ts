@@ -2,14 +2,16 @@ export type TWorkout = {
   id: number;
   name: string;
   image: string;
-  muscleGroups: string[];
+  description: string;
   equipment: string;
-  difficulty: "Beginner" | "Intermediate" | "Advanced";
-  duration: number;
-  caloriesBurned: number;
+  difficulty: string;
   sets: number;
   reps: string;
+  duration: number;
+  caloriesBurned: number;
   rating: number;
-  description: string;
+  muscleGroups: string[];
   instructions: string[];
+
+  completed?: boolean;
 };
