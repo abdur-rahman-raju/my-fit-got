@@ -23,10 +23,6 @@ const WorkoutPlanCard = ({
   onToast,
 }: WorkoutPlanCardProps) => {
 
-  // ====================
-  // REMOVE
-  // ====================
-
   const handleRemove = () => {
 
     if (isPlan) {
@@ -46,11 +42,6 @@ const WorkoutPlanCard = ({
     onUpdate();
   };
 
-
-  // ====================
-  // MARK AS DONE
-  // ====================
-
   const handleDone = () => {
 
     markAsDone(workout.id);
@@ -68,10 +59,6 @@ const WorkoutPlanCard = ({
       }`}
     >
 
-      {/* ====================
-          IMAGE
-      ==================== */}
-
       <Image
         src={workout.image}
         alt={workout.name}
@@ -80,10 +67,6 @@ const WorkoutPlanCard = ({
         className="h-40 w-full rounded-xl object-cover md:h-28 md:w-40"
       />
 
-
-      {/* ====================
-          INFORMATION
-      ==================== */}
 
       <div className="flex-1">
 
@@ -106,11 +89,6 @@ const WorkoutPlanCard = ({
           {workout.equipment}
         </p>
 
-
-        {/* ====================
-            STATS
-        ==================== */}
-
         <div className="mt-4 flex flex-wrap gap-5 text-sm text-gray-400">
 
           <span>
@@ -129,11 +107,6 @@ const WorkoutPlanCard = ({
 
       </div>
 
-
-      {/* ====================
-          ACTION BUTTONS
-      ==================== */}
-
       <div className="flex flex-wrap gap-2">
 
         {/* View Details */}
@@ -146,8 +119,6 @@ const WorkoutPlanCard = ({
         </Link>
 
 
-        {/* Mark as Done */}
-
         {isPlan && !workout.completed && (
           <button
             onClick={handleDone}
@@ -156,9 +127,6 @@ const WorkoutPlanCard = ({
             ✓ Mark as Done
           </button>
         )}
-
-
-        {/* Remove */}
 
         <button
           onClick={handleRemove}

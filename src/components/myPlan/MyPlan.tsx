@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -20,23 +19,20 @@ const MyPlan = () => {
 
   const [toast, setToast] = useState("");
 
-  // Sort
   const [sortBy, setSortBy] =
     useState<"time" | "calories" | "rating">("time");
 
-  // Load data
+  
   useEffect(() => {
     setPlan(getPlan());
     setSaved(getSaved());
   }, []);
 
-  // Reload current localStorage data
   const refreshData = () => {
     setPlan(getPlan());
     setSaved(getSaved());
   };
 
-  // Toast
   const showToast = (message: string) => {
     setToast(message);
 
@@ -45,13 +41,11 @@ const MyPlan = () => {
     }, 2500);
   };
 
-  // Active tab data
   const currentWorkouts =
     activeTab === "plan"
       ? plan
       : saved;
 
-  // Sorted workouts
   const sortedWorkouts = [...currentWorkouts].sort((a, b) => {
     if (sortBy === "time") {
       return a.duration - b.duration;
@@ -73,7 +67,6 @@ const MyPlan = () => {
 
       <div className="container mx-auto">
 
-        {/* Header */}
         <div>
           <p className="text-sm font-bold tracking-widest text-[#C2F800]">
             FITLOG
@@ -88,18 +81,15 @@ const MyPlan = () => {
           </p>
         </div>
 
-        {/* Tabs */}
         <PlanTabs
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
 
-        {/* Metrics */}
         <PlanMetrics
           workouts={currentWorkouts}
         />
 
-        {/* Sort */}
         <div className="mt-8 flex items-center justify-end gap-3">
 
           <label
@@ -137,7 +127,7 @@ const MyPlan = () => {
 
         </div>
 
-        {/* Workout List */}
+
         <div className="mt-10">
 
           {currentWorkouts.length === 0 ? (
@@ -183,7 +173,6 @@ const MyPlan = () => {
 
       </div>
 
-      {/* Toast */}
       {toast && (
         <div className="fixed bottom-6 left-1/2 z-50 -translate-x-1/2 rounded-full bg-[#C2F800] px-6 py-3 text-sm font-bold text-[#1A2312] shadow-lg">
           {toast}

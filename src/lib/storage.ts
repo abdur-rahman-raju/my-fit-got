@@ -3,9 +3,6 @@ import { TWorkout } from "./Api";
 const PLAN_KEY = "fitlog-plan";
 const SAVED_KEY = "fitlog-saved";
 
-// ====================
-// TODAY'S PLAN
-// ====================
 
 export const getPlan = (): TWorkout[] => {
   if (typeof window === "undefined") return [];
@@ -71,9 +68,6 @@ export const markAsDone = (id: number) => {
 };
 
 
-// ====================
-// SAVED
-// ====================
 
 export const getSaved = (): TWorkout[] => {
   if (typeof window === "undefined") return [];

@@ -31,7 +31,7 @@ const WorkoutLibrary = ({ workouts }: WorkoutLibraryProps) => {
   return (
     <div>
 
-      {/* Sort */}
+ 
       <div className="mb-6 flex items-center justify-end gap-3">
         <label
           htmlFor="sort"
@@ -61,7 +61,6 @@ const WorkoutLibrary = ({ workouts }: WorkoutLibraryProps) => {
       </div>
 
 
-      {/* Cards */}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
         {sortedWorkouts.map((workout) => (
           <FtiCards

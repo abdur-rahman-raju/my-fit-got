@@ -7,7 +7,6 @@ const Footer = () => {
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="my-10 flex flex-col items-center justify-between gap-4 sm:flex-row">
 
-        {/* Logo */}
         <Image
           src={footer}
           alt="FitLog"

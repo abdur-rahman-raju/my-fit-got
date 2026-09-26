@@ -2,20 +2,20 @@
 
 import { TWorkout } from "@/lib/Api";
 import { addToPlan, addToSaved } from "@/lib/storage";
+import { toast } from "react-toastify";
 
 type WorkoutActionsProps = {
   workout: TWorkout;
 };
 
 const WorkoutActions = ({ workout }: WorkoutActionsProps) => {
-
   const handleAddToPlan = () => {
     const added = addToPlan(workout);
 
     if (added) {
-      alert("Added to today's plan");
+      toast.success("Added to today's plan");
     } else {
-      alert("Workout is already in today's plan or plan is full.");
+      toast.error("Already added or plan is full");
     }
   };
 
@@ -23,16 +23,15 @@ const WorkoutActions = ({ workout }: WorkoutActionsProps) => {
     const saved = addToSaved(workout);
 
     if (saved) {
-      alert("Saved for later");
+      toast.success("Saved for later");
     } else {
-      alert("Workout is already saved.");
+      toast.error("Already saved");
     }
   };
 
   return (
     <div className="mt-8 flex flex-col gap-3 sm:flex-row">
 
-      {/* Add to Today's Plan */}
       <button
         onClick={handleAddToPlan}
         className="flex items-center justify-center gap-2 rounded-full bg-[#C2F800] px-6 py-3 font-bold text-black transition-all duration-300 hover:bg-[#d5ff45]"
@@ -41,7 +40,6 @@ const WorkoutActions = ({ workout }: WorkoutActionsProps) => {
         Add to today's plan
       </button>
 
-      {/* Save for Later */}
       <button
         onClick={handleSaveForLater}
         className="flex items-center justify-center gap-2 rounded-full border border-white px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-white hover:text-[#101215]"
