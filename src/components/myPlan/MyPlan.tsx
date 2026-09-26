@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -18,6 +19,10 @@ const MyPlan = () => {
   const [saved, setSaved] = useState<TWorkout[]>([]);
 
   const [toast, setToast] = useState("");
+
+  // Sort
+  const [sortBy, setSortBy] =
+    useState<"time" | "calories" | "rating">("time");
 
   // Load data
   useEffect(() => {
@@ -46,6 +51,23 @@ const MyPlan = () => {
       ? plan
       : saved;
 
+  // Sorted workouts
+  const sortedWorkouts = [...currentWorkouts].sort((a, b) => {
+    if (sortBy === "time") {
+      return a.duration - b.duration;
+    }
+
+    if (sortBy === "calories") {
+      return a.caloriesBurned - b.caloriesBurned;
+    }
+
+    if (sortBy === "rating") {
+      return b.rating - a.rating;
+    }
+
+    return 0;
+  });
+
   return (
     <main className="min-h-screen bg-[#101215] px-4 py-10 text-white">
 
@@ -66,19 +88,54 @@ const MyPlan = () => {
           </p>
         </div>
 
-
         {/* Tabs */}
         <PlanTabs
           activeTab={activeTab}
           setActiveTab={setActiveTab}
         />
 
-
         {/* Metrics */}
         <PlanMetrics
           workouts={currentWorkouts}
         />
 
+        {/* Sort */}
+        <div className="mt-8 flex items-center justify-end gap-3">
+
+          <label
+            htmlFor="sort"
+            className="text-sm font-bold text-gray-500"
+          >
+            Sort By
+          </label>
+
+          <select
+            id="sort"
+            value={sortBy}
+            onChange={(e) =>
+              setSortBy(
+                e.target.value as
+                  | "time"
+                  | "calories"
+                  | "rating"
+              )
+            }
+            className="rounded-full border border-gray-700 bg-[#1A1D21] px-4 py-2 text-sm font-bold text-white outline-none focus:border-[#C2F800]"
+          >
+            <option value="time">
+              Time
+            </option>
+
+            <option value="calories">
+              Calories
+            </option>
+
+            <option value="rating">
+              Rating
+            </option>
+          </select>
+
+        </div>
 
         {/* Workout List */}
         <div className="mt-10">
@@ -108,7 +165,7 @@ const MyPlan = () => {
 
             <div className="space-y-4">
 
-              {currentWorkouts.map((workout) => (
+              {sortedWorkouts.map((workout) => (
                 <WorkoutPlanCard
                   key={workout.id}
                   workout={workout}
@@ -125,7 +182,6 @@ const MyPlan = () => {
         </div>
 
       </div>
-
 
       {/* Toast */}
       {toast && (

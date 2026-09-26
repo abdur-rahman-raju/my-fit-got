@@ -33,11 +33,11 @@ const Navbar = () => {
   const isPlanActive = pathname === "/my-plan";
 
   return (
-    <div className="container mx-auto my-5">
+    <div className="container mx-auto px-4 py-5 sm:px-6 lg:px-8">
       <div className="flex items-center justify-between">
 
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+       
+        <Link href="/" className="flex shrink-0 items-center gap-2">
           <Image
             src={fitLogo}
             alt="FITLOG"
@@ -50,14 +50,12 @@ const Navbar = () => {
           </h4>
         </Link>
 
-        {/* Navigation */}
-        <ul className="flex items-center gap-5">
-
-          {/* Workouts */}
+        
+        <ul className="hidden items-center gap-2 sm:flex sm:gap-5">
           <li>
             <Link
               href="/#library"
-              className={`rounded-full border border-transparent px-5 py-2 transition-all duration-300 ${
+              className={`rounded-full border border-transparent px-4 py-2 text-sm transition-all duration-300 sm:px-5 ${
                 isWorkoutActive
                   ? "bg-[#1A2312] text-[#C2F800]"
                   : "hover:bg-[#1A2312] hover:text-[#C2F800]"
@@ -67,11 +65,10 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {/* My Plan */}
           <li>
             <Link
               href="/my-plan"
-              className={`rounded-full border border-transparent px-5 py-2 transition-all duration-300 ${
+              className={`rounded-full border border-transparent px-4 py-2 text-sm transition-all duration-300 sm:px-5 ${
                 isPlanActive
                   ? "bg-[#1A2312] text-[#C2F800]"
                   : "hover:bg-[#1A2312] hover:text-[#C2F800]"
@@ -80,31 +77,54 @@ const Navbar = () => {
               My Plan
             </Link>
           </li>
-
         </ul>
 
-        {/* Counters */}
-        <div className="flex items-center gap-3">
-
-          {/* Plan */}
+        
+        <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <Link
             href="/my-plan"
-            className="rounded-full bg-[#C2F800] px-4 py-2 text-sm font-bold text-[#1A2312]"
+            className="rounded-full bg-[#C2F800] px-3 py-2 text-xs font-bold text-[#1A2312] sm:px-4 sm:text-sm"
           >
             Plan {planCount}
           </Link>
 
-          {/* Saved */}
           <Link
             href="/my-plan"
-            className="rounded-full border border-white px-4 py-2 text-sm font-bold text-white"
+            className="rounded-full border border-white px-3 py-2 text-xs font-bold text-white sm:px-4 sm:text-sm"
           >
             Saved {savedCount}
           </Link>
-
         </div>
-
       </div>
+
+      {/* Mobile Navigation */}
+      <ul className="mt-5 flex items-center justify-center gap-3 sm:hidden">
+        <li>
+          <Link
+            href="/#library"
+            className={`rounded-full border border-transparent px-5 py-2 text-sm transition-all duration-300 ${
+              isWorkoutActive
+                ? "bg-[#1A2312] text-[#C2F800]"
+                : "hover:bg-[#1A2312] hover:text-[#C2F800]"
+            }`}
+          >
+            Workouts
+          </Link>
+        </li>
+
+        <li>
+          <Link
+            href="/my-plan"
+            className={`rounded-full border border-transparent px-5 py-2 text-sm transition-all duration-300 ${
+              isPlanActive
+                ? "bg-[#1A2312] text-[#C2F800]"
+                : "hover:bg-[#1A2312] hover:text-[#C2F800]"
+            }`}
+          >
+            My Plan
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
